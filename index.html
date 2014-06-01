@@ -9,7 +9,7 @@
 <form role="form" action="/generator" method="post">
   <div class="form-group">
     <label for="exampleInputEmail1">Length string</label>
-    <input type="number" min="2" name="lenght" class="form-control" id="exampleInputEmail1" placeholder="Length string" required>
+    <input type="number" min="1" name="lenght" class="form-control" id="exampleInputEmail1" placeholder="Length string" required>
   </div>
   <div class="form-group">
     <label>Which characters are allowed to occur in the strings?</label>
@@ -17,31 +17,49 @@
   <div class="radio">
     <label>
       <input type="radio" name="typ" value="letter" required>
-      Letters (A-Za-z) -> Length minimun: 2
+      Letters (A-Za-z) -> Minimum length: 1
     </label>
   </div>
   <div class="radio">
     <label>
       <input type="radio" name="typ" value="numeric" required>
-      Numeric digits (0-9) -> Length minimun: 3
+      Numeric digits (0-9) -> Minimum length: 1
+    </label>
+  </div>
+  <div class="radio">
+    <label>
+      <input type="radio" name="typ" value="alpha" required>
+      Alphanumerics (0-9A-Za-z) -> Minimum length: 1
     </label>
   </div>
   <div class="radio">
     <label>
       <input type="radio" name="typ" value="simbols" required>
-      Simbols letters -> Length minimun: 36
+      Simbols letters -> Minimum length: 1
+    </label>
+  </div>
+  <div class="radio">
+    <label>
+      <input type="radio" name="typ" value="quotas" required>
+      Quotas characters -> Minimum length: 3
     </label>
   </div>
   <div class="radio">
     <label>
       <input type="radio" name="typ" value="extra" required>
-      Extra simbols letters -> Length minimun: 132
+      Extra simbols letters -> Minimum length: 1
+    </label>
+  </div>
+  <div class="radio">
+    <label>
+      <input type="radio" name="typ" value="all" required>
+      All letters -> Minimum length: 1
     </label>
   </div>
   <div class="radio">
     <label>
       <input type="radio" name="typ" value="lengtype" required>
-      String
+      Lenght String -> Minimum length: 1
     </label>
   </div>
   <div class="form-group">

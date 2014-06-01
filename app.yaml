@@ -1,5 +1,5 @@
-application: your-id-in-gae
-version: 1
+application: id-app-in-gae
+version: 2
 runtime: python27
 api_version: 1
 threadsafe: true
@@ -7,6 +7,8 @@ threadsafe: true
 handlers:
 - url: /stylesheets
   static_dir: stylesheets
+- url: /img
+  static_dir: img
 - url: /.*
   script: main.application
 

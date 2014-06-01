@@ -1,6 +1,9 @@
+# -*- encoding: utf-8 -*-
+
 import os
 import jinja2
 import webapp2
+import random
 
 
 JINJA_ENVIRONMENT = jinja2.Environment(
@@ -36,64 +39,100 @@ class GeneratorPage(webapp2.RequestHandler):
             results = ''.join(v)
             lenres = len(results)
         else:
-            if "extra" in let:
-                if lenstr >= 132:
+            if "all" in let:
+                if lenstr >= 1:
                     v = []
-                    v.append("aA4#")
-                    for i in range(128,256):
-                        v.append(unichr(i))
-                    if lenstr > 132:
-                        for i in range(lenstr-132):
-                             v.append('T')
+                    for i in xrange(lenstr):
+                        var = random.randrange(32, 255, 1)
+                        if var == 127:
+                            var = var-5
+                        v.append(unichr(var))
                     results = ''.join(v)
                     lenres = len(results)
                 else:
                     error = True
-                    results = "Length minimun is 132 for extra symbols."
-            elif "simbols" in let:
-                if lenstr >= 36:
+                    results = "Minimum length is 1 for all characters."
+            elif "extra" in let:
+                if lenstr >= 1:
                     v = []
-                    v.append("aA4")
-                    for i in range(32,48):
-                        v.append(unichr(i))
-                    for i in range(58,65):
-                        v.append(unichr(i))
-                    for i in range(91,97):
-                        v.append(unichr(i))
-                    for i in range(123,127):
-                        v.append(unichr(i))
-                    if lenstr > 36:
-                        for i in range(lenstr-36):
-                            v.append('#')
+                    for i in xrange(lenstr):
+                        var = random.randrange(128, 255, 1)
+                        v.append(unichr(var))
                     results = ''.join(v)
                     lenres = len(results)
                 else:
                     error = True
-                    results = "Length minimun is 36 for simbols."
-            elif "numeric" in let:
+                    results = "Minimum length is 1 for extra symbols."
+            elif "quotas" in let:
                 if lenstr >= 3:
                     v = []
-                    v.append("aA4")
-                    if lenstr > 3:
-                        for i in range(lenstr-3):
-                            v.append('2')
+                    for i in xrange(lenstr):
+                        var = random.randrange(1, 3, 1)
+                        if var == 1:
+                            v.append(unichr(34))
+                        elif var == 2:
+                            v.append(unichr(39))
+                        else:
+                            v.append(unichr(96))
                     results = ''.join(v)
                     lenres = len(results)
                 else:
                     error = True
-                    results = "Length minimun is 3 for numbers."
-            else:
-                if lenstr >= 2:
+                    results = "Minimum length is 3 for quotas symbols."
+            elif "simbols" in let:
+                if lenstr >= 1:
                     v = []
-                    v.append("aA")
-                    if lenstr > 2:
-                        for i in range(lenstr-2):
-                            v.append('E')
+                    for i in xrange(lenstr):
+                        var = random.randrange(32, 126, 1)
+                        v.append(unichr(var))
                     results = ''.join(v)
                     lenres = len(results)
                 else:
                     error = True
-                    results = "Length minimun is 2 for letters."
+                    results = "Minimum length is 1 for simbols."
+            elif "alpha" in let:
+                if lenstr >= 1:
+                    v = []
+                    for i in xrange(lenstr):
+                        var = random.randrange(1, 62, 1)
+                        if var <= 10:
+                            var = random.randrange(48, 57, 1)
+                        elif var <=36:
+                            var = random.randrange(65, 90, 1)
+                        else:
+                            var = random.randrange(97, 122, 1)
+                        v.append(unichr(var))
+                    results = ''.join(v)
+                    lenres = len(results)
+                else:
+                    error = True
+                    results = "Minimum length is 1 for alphanumerics characters."
+            elif "numeric" in let:
+                if lenstr >= 1:
+                    v = []
+                    for i in xrange(lenstr):
+                        var = random.randrange(48, 57, 1)
+                        v.append(unichr(var))
+                    results = ''.join(v)
+                    lenres = len(results)
+                else:
+                    error = True
+                    results = "Minimum length is 1 for numbers."
+            else:
+                if lenstr >= 1:
+                    v = []
+                    for i in xrange(lenstr):
+                        var = random.randrange(1, 52, 1)
+                        if var <=26:
+                            var = random.randrange(65, 90, 1)
+                        else:
+                            var = random.randrange(97, 122, 1)
+                        v.append(unichr(var))
+                    results = ''.join(v)
+                    lenres = len(results)
+                else:
+                    error = True
+                    results = "Minimum length is 1 for letters."
 
         template_values = {
             'result': results,
